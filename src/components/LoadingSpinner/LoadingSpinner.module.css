@@ -1,0 +1,18 @@
+.loading {
+  width: 100px;
+  height: 100px;
+  align-self: center;
+  justify-self: center;
+  animation: spin 1000ms;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0turn);
+  }
+  to {
+    transform: rotate(1turn);
+  }
+}

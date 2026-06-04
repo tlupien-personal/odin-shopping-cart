@@ -23,5 +23,6 @@ dist-ssr
 *.sln
 *.sw?
 
-# External Monologue
+# External monologue, nonsense, etc.
 notes.md
+temp.js
