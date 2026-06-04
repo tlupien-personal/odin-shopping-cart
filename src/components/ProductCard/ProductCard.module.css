@@ -5,7 +5,7 @@
   padding: 25px;
   display: grid;
   grid-template-columns: 100%;
-  grid-template-rows: 1fr 250px 1.5rem 1rem;
+  grid-template-rows: 1fr 250px 1.5rem 2rem;
   gap: 10px;
   justify-items: center;
 }
@@ -23,4 +23,59 @@
 .price {
   font-size: 1.5rem;
   font-weight: bold;
+}
+
+.cartForm {
+  display: grid;
+  grid-template-columns: min-content 25px 1fr;
+  align-items: center;
+  gap: 1ch;
+}
+
+.formRow {
+  display: flex;
+  gap: 1ch;
+  font-weight: bold;
+  align-items: center;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+.formRow input {
+  max-width: 5ch;
+  text-align: right;
+}
+
+.ments {
+  display: flex;
+  flex-direction: column;
+}
+
+.ments button {
+  padding: 0;
+  border: none;
+  background-color: unset;
+}
+.ments button svg {
+  width: 25px;
+  height: 25px;
+}
+
+.add {
+  background-color: teal;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  padding: 5px 10px;
+  white-space: nowrap;
 }
