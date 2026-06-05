@@ -1,0 +1,4 @@
+.cartTable {
+  display: grid;
+  grid-template-columns: 100px 40ch 5ch 10ch;
+}
