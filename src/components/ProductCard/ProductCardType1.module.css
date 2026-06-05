@@ -71,7 +71,7 @@ input[type="number"] {
   height: 25px;
 }
 
-.add {
+.commandBtn {
   background-color: teal;
   border: none;
   color: white;

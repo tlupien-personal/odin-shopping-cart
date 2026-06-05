@@ -1,28 +1,25 @@
+/*TODO: MAKE THIS WORK ON MOBILE!!*/
+
 .card {
-  border: 1px solid black;
-  border-radius: 10px;
-  box-shadow: 2px 2px 4px #666;
   padding: 25px;
   display: grid;
-  grid-template-columns: 100%;
-  grid-template-rows: 1fr 250px 1.5rem 2rem;
-  gap: 10px;
+  grid-template-columns: 100px 100px 10ch 225px 10ch;
+  gap: 25px;
   justify-items: center;
-  background-color: coral; /* proof of concept */
+  align-items: center;
 }
 
 .card > img {
-  max-height: 100%;
+  max-width: 100%;
   align-self: center;
 }
 
 .title {
-  font-size: 1.25rem;
   align-self: center;
 }
 
 .price {
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-weight: bold;
 }
 
@@ -72,10 +69,9 @@ input[type="number"] {
   height: 25px;
 }
 
-.add {
-  background-color: teal;
+.commandBtn {
+  background-color: coral;
   border: none;
-  color: white;
   border-radius: 5px;
   padding: 5px 10px;
   white-space: nowrap;

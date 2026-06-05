@@ -25,7 +25,7 @@ export default function Cart() {
     return (
       <div className={styles.cart}>
         <h1>Cart</h1>
-        <ProductGrid styleType={2} products={cartProducts} />
+        <ProductGrid styleType={2} products={cartProducts} isInCart={true} />
       </div>
     );
   }

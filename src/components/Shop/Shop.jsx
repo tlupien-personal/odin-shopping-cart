@@ -18,7 +18,11 @@ export default function Shop() {
     return (
       <div className={styles.shop}>
         <h1>Shop</h1>
-        <ProductGrid styleType={1} products={Object.values(products)} />
+        <ProductGrid
+          styleType={1}
+          products={Object.values(products)}
+          isInCart={false}
+        />
       </div>
     );
   }
