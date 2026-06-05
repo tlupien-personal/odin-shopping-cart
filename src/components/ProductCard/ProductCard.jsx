@@ -1,8 +1,10 @@
 import { useState } from "react";
+import { useOutletContext } from "react-router";
 import styles from "./ProductCard.module.css";
 
 export default function ProductCard({ data }) {
   const [quantity, setQuantity] = useState(1);
+  const [cart, setCart] = useOutletContext();
 
   const increment = (e) => {
     e.preventDefault();
@@ -18,7 +20,7 @@ export default function ProductCard({ data }) {
 
   const addToCart = (e) => {
     e.preventDefault();
-    console.log("not implemented (yet)");
+    setCart({ ...cart, [data.id]: (cart[data.id] ?? 0) + quantity });
   };
 
   return (
