@@ -67,6 +67,7 @@ export default function ProductCard({ styleType, data, isInCart }) {
         </div>
         <div className={styles.ments}>
           <button
+            aria-label="increment"
             className={styles.increment}
             type="button"
             onClick={increment}
@@ -77,6 +78,7 @@ export default function ProductCard({ styleType, data, isInCart }) {
             </svg>
           </button>
           <button
+            aria-label="decrement"
             className={styles.decrement}
             type="button"
             onClick={decrement}
