@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
 
-let productCache = [];
+let productCache = {};
 
 export default function useProductData() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState({});
 
   const fetchData = async () => {
-    if (productCache.length === 0) {
+    if (Object.keys(productCache).length === 0) {
       try {
         setIsLoading(true);
         const response = await fetch("https://fakestoreapi.com/products");
@@ -18,14 +18,16 @@ export default function useProductData() {
           );
         }
         const data = await response.json();
-        productCache = data;
+        for (const p of data) {
+          productCache[p.id] = p;
+        }
       } catch (err) {
         setError(err);
       } finally {
         setIsLoading(false);
       }
     }
-    setProducts(productCache);
+    setProducts({ ...productCache });
   };
 
   useEffect(() => {

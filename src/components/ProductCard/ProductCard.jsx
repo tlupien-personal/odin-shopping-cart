@@ -1,9 +1,14 @@
 import { useState } from "react";
 import { useOutletContext } from "react-router";
-import styles from "./ProductCard.module.css";
+import type1Styles from "./ProductCardType1.module.css";
+import type2Styles from "./ProductCardType2.module.css";
 
-export default function ProductCard({ data }) {
-  const [quantity, setQuantity] = useState(1);
+export default function ProductCard({ styleType, data }) {
+  let styles = type1Styles;
+  if (styleType == 2) {
+    styles = type2Styles;
+  }
+  const [quantity, setQuantity] = useState(data.quantity ?? 1);
   const [cart, setCart] = useOutletContext();
 
   const increment = (e) => {
@@ -27,7 +32,7 @@ export default function ProductCard({ data }) {
     <div className={styles.card}>
       <p className={styles.title}>{data.title}</p>
       <img src={data.image} />
-      <p className={styles.price}>${data.price.toFixed(2)}</p>
+      <p className={styles.price}>${data.price?.toFixed(2)}</p>
       <form className={styles.cartForm}>
         <div className={styles.formRow}>
           <label htmlFor="qty">Qty</label>
