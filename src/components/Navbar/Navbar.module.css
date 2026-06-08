@@ -9,13 +9,3 @@
   background-color: #ccc;
   padding: 25px;
 }
-
-.cartContainer {
-  justify-self: flex-end;
-  margin-left: auto;
-}
-
-.cart {
-  width: 33px;
-  height: 33px;
-}

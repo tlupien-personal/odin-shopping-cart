@@ -1,0 +1,26 @@
+.cartContainer {
+  justify-self: flex-end;
+  margin-left: auto;
+  text-decoration: none;
+  display: flex;
+}
+
+.cartContainer:visited {
+  color: black;
+}
+
+.cart {
+  width: 33px;
+  height: 33px;
+}
+
+.cartBadge {
+  border-radius: 50%;
+  border: 2px solid black;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 33px;
+  height: 33px;
+}
