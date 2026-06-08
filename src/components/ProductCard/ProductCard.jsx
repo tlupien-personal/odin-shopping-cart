@@ -12,9 +12,7 @@ export default function ProductCard({ styleType, data, isInCart }) {
   const [cart, setCart] = useOutletContext();
 
   const replaceCartEntry = (newQuantity) => {
-    setCart((cart) => {
-      return { ...cart, [data.id]: newQuantity };
-    });
+    setCart({ ...cart, [data.id]: newQuantity });
   };
 
   const increment = (e) => {
@@ -52,7 +50,7 @@ export default function ProductCard({ styleType, data, isInCart }) {
   return (
     <div className={styles.card}>
       <p className={styles.title}>{data.title}</p>
-      <img src={data.image} />
+      <img src={data.image} alt="a fake product image" />
       <p className={styles.price}>${data.price?.toFixed(2)}</p>
       <form className={styles.cartForm}>
         <div className={styles.formRow}>
@@ -90,6 +88,7 @@ export default function ProductCard({ styleType, data, isInCart }) {
           </button>
         </div>
         <button
+          aria-label="command"
           className={styles.commandBtn}
           type="button"
           onClick={isInCart ? removeFromCart : addToCart}
