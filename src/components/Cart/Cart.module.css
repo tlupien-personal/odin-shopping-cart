@@ -1,10 +1,11 @@
 .cart {
-  padding: 50px;
-  padding-top: 0;
-  max-width: 800px;
+  padding: 25px;
   margin: 0 auto;
+  width: fit-content;
 }
 
-.cart h1 {
-  line-height: 2;
+@media (width < 600px) {
+  .cart {
+    padding: 0;
+  }
 }

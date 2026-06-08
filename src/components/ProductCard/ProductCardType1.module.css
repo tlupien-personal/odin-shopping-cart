@@ -3,26 +3,26 @@
   border-radius: 10px;
   box-shadow: 2px 2px 4px #666;
   padding: 25px;
-  display: grid;
-  grid-template-columns: 100%;
-  grid-template-rows: 1fr 250px 1.5rem 2rem;
+  display: flex;
+  flex-direction: column;
   gap: 10px;
-  justify-items: center;
+  align-items: center;
 }
 
 .card > img {
-  max-height: 100%;
-  align-self: center;
+  max-height: 200px;
+  justify-self: center;
+  margin: auto 0;
 }
 
 .title {
   font-size: 1.25rem;
-  align-self: center;
 }
 
 .price {
   font-size: 1.5rem;
   font-weight: bold;
+  justify-self: flex-end;
 }
 
 .cartForm {
@@ -30,6 +30,7 @@
   grid-template-columns: min-content 25px 1fr;
   align-items: center;
   gap: 1ch;
+  justify-self: flex-end;
 }
 
 .formRow {

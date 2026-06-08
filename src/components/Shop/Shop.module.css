@@ -1,8 +1,9 @@
 .shop {
-  padding: 50px;
-  padding-top: 0;
+  padding: 25px 50px;
 }
 
-.shop h1 {
-  line-height: 2;
+@media (width < 600px) {
+  .shop {
+    padding: 25px;
+  }
 }

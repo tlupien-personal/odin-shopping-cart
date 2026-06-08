@@ -8,4 +8,5 @@
   width: 100%;
   background-color: #ccc;
   padding: 25px;
+  z-index: 2;
 }
