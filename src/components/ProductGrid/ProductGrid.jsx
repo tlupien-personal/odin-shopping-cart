@@ -1,15 +1,12 @@
 import ProductCard from "../ProductCard";
 import type1Styles from "./ProductGridType1.module.css";
 import type2Styles from "./ProductGridType2.module.css";
-import { useOutletContext } from "react-router";
 
 export default function ProductGrid({ styleType, products, isInCart }) {
   let styles = type1Styles;
   if (styleType == 2) {
     styles = type2Styles;
   }
-
-  const [cart, _] = useOutletContext();
 
   const productCards = products.map((p) => {
     return (
@@ -33,10 +30,9 @@ export default function ProductGrid({ styleType, products, isInCart }) {
     </>
   );
 
-  const grandTotal = Object.values(products).reduce(
-    (p, c) => p + c.price * c.quantity,
-    0,
-  );
+  const grandTotal = Object.values(products)
+    .reduce((p, c) => p + c.price * c.quantity, 0)
+    .toFixed(2);
 
   const totalDisplay = (
     <div className={styles.grandTotalDisplay}>
