@@ -2,11 +2,14 @@ import styles from "./CartIcon.module.css";
 import { Link } from "react-router";
 
 export default function CartIcon({ cart }) {
+  const cartSize = Object.values(cart).reduce((p, c) => p + c, 0);
   return (
-    <Link className={`hoverGrow ${styles.cartContainer}`} to="/cart">
-      <p className={styles.cartBadge}>
-        {Object.values(cart).reduce((p, c) => p + c, 0)}
-      </p>
+    <Link
+      className={`hoverGrow ${styles.cartContainer}`}
+      key={cartSize}
+      to="/cart"
+    >
+      <p className={styles.cartBadge}>{cartSize}</p>
       <svg
         className={styles.cart}
         xmlns="http://www.w3.org/2000/svg"

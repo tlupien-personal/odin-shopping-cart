@@ -79,4 +79,9 @@ input[type="number"] {
   border-radius: 5px;
   padding: 5px 10px;
   white-space: nowrap;
+  box-shadow: 2px 2px 4px #666;
+}
+
+.commandBtn:active {
+  box-shadow: unset;
 }

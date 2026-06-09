@@ -3,6 +3,10 @@
   margin-left: auto;
   text-decoration: none;
   display: flex;
+  border: 2px solid rgba(255 255 255 / 0);
+  padding: 10px;
+  border-radius: 10px;
+  animation: blink 1.5s 1 ease-in-out
 }
 
 .cartContainer:visited {
@@ -26,4 +30,16 @@
   height: 33px;
   font-size: 1rem;
   padding-top: 1px;
+}
+
+@keyframes blink {
+  0% {
+    border: 2px solid rgba(255 255 255 / 0);
+  }
+  50% {
+    border: 2px solid rgba(255 255 255 / 1);
+  }
+  100% {
+    border: 2px solid rgba(255 255 255 / 0);
+  }
 }
