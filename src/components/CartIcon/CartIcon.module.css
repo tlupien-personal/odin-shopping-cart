@@ -6,21 +6,24 @@
 }
 
 .cartContainer:visited {
-  color: black;
+  color: white;
 }
 
 .cart {
   width: 33px;
   height: 33px;
+  fill: white;
 }
 
 .cartBadge {
   border-radius: 50%;
-  border: 2px solid black;
+  border: 2px solid white;
   font-weight: bold;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 33px;
   height: 33px;
+  font-size: 1rem;
+  padding-top: 1px;
 }

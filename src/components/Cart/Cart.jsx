@@ -24,8 +24,10 @@ export default function Cart() {
 
     return (
       <div className={styles.cart}>
-        <h1>Cart</h1>
-        <ProductGrid styleType={2} products={cartProducts} isInCart={true} />
+        <h1>Cart {cartProducts.length === 0 && "(empty)"}</h1>
+        {cartProducts.length > 0 && (
+          <ProductGrid styleType={2} products={cartProducts} isInCart={true} />
+        )}
       </div>
     );
   }

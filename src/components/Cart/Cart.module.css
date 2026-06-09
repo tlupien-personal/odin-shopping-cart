@@ -6,6 +6,6 @@
 
 @media (width < 600px) {
   .cart {
-    padding: 0;
+    padding: 10px;
   }
 }

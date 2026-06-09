@@ -3,7 +3,7 @@ import { Link } from "react-router";
 
 export default function CartIcon({ cart }) {
   return (
-    <Link className={styles.cartContainer} to="/cart">
+    <Link className={`hoverGrow ${styles.cartContainer}`} to="/cart">
       <p className={styles.cartBadge}>
         {Object.values(cart).reduce((p, c) => p + c, 0)}
       </p>

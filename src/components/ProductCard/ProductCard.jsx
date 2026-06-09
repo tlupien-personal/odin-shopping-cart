@@ -66,7 +66,7 @@ export default function ProductCard({ styleType, data, isInCart }) {
         <div className={styles.ments}>
           <button
             aria-label="increment"
-            className={styles.increment}
+            className={`hoverGrow ${styles.increment}`}
             type="button"
             onClick={increment}
           >
@@ -77,7 +77,7 @@ export default function ProductCard({ styleType, data, isInCart }) {
           </button>
           <button
             aria-label="decrement"
-            className={styles.decrement}
+            className={`hoverGrow ${styles.decrement}`}
             type="button"
             onClick={decrement}
           >
@@ -89,7 +89,7 @@ export default function ProductCard({ styleType, data, isInCart }) {
         </div>
         <button
           aria-label="command"
-          className={styles.commandBtn}
+          className={`hoverGrow ${styles.commandBtn}`}
           type="button"
           onClick={isInCart ? removeFromCart : addToCart}
         >
