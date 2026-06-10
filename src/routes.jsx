@@ -2,6 +2,7 @@ import App from "./components/App";
 import Home from "./components/Home";
 import Shop from "./components/Shop";
 import Cart from "./components/Cart";
+import NotFound from "./components/NotFound/NotFound";
 
 const routes = [
   {
@@ -21,6 +22,7 @@ const routes = [
         element: <Cart />,
       },
     ],
+    errorElement: <NotFound />,
   },
 ];
 
