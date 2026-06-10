@@ -1,8 +1,7 @@
 import App from "./components/App";
 import Home from "./components/Home";
-import Shop from "./components/Shop";
-import Cart from "./components/Cart";
-import NotFound from "./components/NotFound/NotFound";
+import NotFound from "./components/NotFound";
+import ProductPage from "./components/ProductPage";
 
 const routes = [
   {
@@ -15,11 +14,11 @@ const routes = [
       },
       {
         path: "shop",
-        element: <Shop />,
+        element: <ProductPage pageType="shop" />,
       },
       {
         path: "cart",
-        element: <Cart />,
+        element: <ProductPage pageType="cart" />,
       },
     ],
     errorElement: <NotFound />,

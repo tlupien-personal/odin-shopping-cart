@@ -19,12 +19,12 @@ const MOCK_DATA = {
   title: "test title",
 };
 
-const buttonSetup = async (buttonName, cartMode = false, quantity) => {
+const buttonSetup = async (buttonName, pageType = "shop", quantity) => {
   const user = userEvent.setup();
   render(
     <ProductCard
       data={quantity ? { ...MOCK_DATA, quantity } : MOCK_DATA}
-      isInCart={cartMode}
+      pageType={pageType}
     />,
   );
   const button = await screen.findByRole("button", {
@@ -70,7 +70,7 @@ describe("ProductCard", () => {
   });
 
   it("increments quantity with cart side effect fresh", async () => {
-    const [user, button] = await buttonSetup("increment", true);
+    const [user, button] = await buttonSetup("increment", "cart");
     await user.click(button);
     const qtyInput = await screen.findByRole("spinbutton");
     expect(+qtyInput.value).toBe(2);
@@ -83,7 +83,7 @@ describe("ProductCard", () => {
 
   it("increments quantity with cart side effect used", async () => {
     mockCart = { 1: 1, 69: 2 };
-    const [user, button] = await buttonSetup("increment", true, 2);
+    const [user, button] = await buttonSetup("increment", "cart", 2);
     await user.click(button);
     const qtyInput = await screen.findByRole("spinbutton");
     expect(+qtyInput.value).toBe(3);
@@ -95,7 +95,7 @@ describe("ProductCard", () => {
   });
 
   it("decrements quantity", async () => {
-    const [user, button] = await buttonSetup("decrement", false, 3);
+    const [user, button] = await buttonSetup("decrement", "shop", 3);
     await user.click(button);
     const qtyInput = await screen.findByRole("spinbutton");
     expect(+qtyInput.value).toBe(2);
@@ -103,7 +103,7 @@ describe("ProductCard", () => {
   });
 
   it("decrements quantity with cart side effect fresh", async () => {
-    const [user, button] = await buttonSetup("decrement", true, 3);
+    const [user, button] = await buttonSetup("decrement", "cart", 3);
     await user.click(button);
     const qtyInput = await screen.findByRole("spinbutton");
     expect(+qtyInput.value).toBe(2);
@@ -116,7 +116,7 @@ describe("ProductCard", () => {
 
   it("decrements quantity with cart side effect used", async () => {
     mockCart = { 1: 1, 69: 2 };
-    const [user, button] = await buttonSetup("decrement", true, 2);
+    const [user, button] = await buttonSetup("decrement", "cart", 2);
     await user.click(button);
     const qtyInput = await screen.findByRole("spinbutton");
     expect(+qtyInput.value).toBe(1);
@@ -128,7 +128,7 @@ describe("ProductCard", () => {
   });
 
   it("adds to cart fresh", async () => {
-    const [user, button] = await buttonSetup("command", false, 2);
+    const [user, button] = await buttonSetup("command", "shop", 2);
     await user.click(button);
     expect(mockSetCart).toHaveBeenCalledTimes(1);
     expect(mockSetCart).toHaveBeenCalledWith({
@@ -139,7 +139,7 @@ describe("ProductCard", () => {
 
   it("adds to cart used", async () => {
     mockCart = { 1: 1, 69: 2 };
-    const [user, button] = await buttonSetup("command", false, 2);
+    const [user, button] = await buttonSetup("command", "shop", 2);
     await user.click(button);
     expect(mockSetCart).toHaveBeenCalledTimes(1);
     expect(mockSetCart).toHaveBeenCalledWith({
@@ -150,7 +150,7 @@ describe("ProductCard", () => {
 
   it("removes from cart", async () => {
     mockCart = { 1: 1, 69: 2 };
-    const [user, button] = await buttonSetup("command", true, 2);
+    const [user, button] = await buttonSetup("command", "cart", 2);
     await user.click(button);
     expect(mockSetCart).toHaveBeenCalledTimes(1);
     expect(mockSetCart).toHaveBeenCalledWith({

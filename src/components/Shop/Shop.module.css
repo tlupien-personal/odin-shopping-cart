@@ -1,9 +1,0 @@
-.shop {
-  padding: 25px 50px;
-}
-
-@media (width < 600px) {
-  .shop {
-    padding: 25px;
-  }
-}

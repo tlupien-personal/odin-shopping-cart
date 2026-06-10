@@ -1,51 +1,45 @@
 import ProductCard from "../ProductCard";
-import type1Styles from "./ProductGridType1.module.css";
-import type2Styles from "./ProductGridType2.module.css";
+import shopStyles from "./ProductGridShop.module.css";
+import cartStyles from "./ProductGridCart.module.css";
 
-export default function ProductGrid({ styleType, products, isInCart }) {
-  let styles = type1Styles;
-  if (styleType == 2) {
-    styles = type2Styles;
-  }
-
+export default function ProductGrid({ products, pageType }) {
   const productCards = products.map((p) => {
-    return (
-      <ProductCard
-        key={p.id}
-        styleType={styleType}
-        data={p}
-        isInCart={isInCart}
-      />
-    );
+    return <ProductCard key={p.id} data={p} pageType={pageType} />;
   });
 
-  const cartHeader = (
-    <>
-      <p className={styles.productTitle + " " + styles.tableLikeBracket}>
-        Product
-      </p>
-      <p className={styles.tableLikeBracket}>Price (Each)</p>
-      <p className={styles.tableLikeBracket}>Quantity</p>
-      <p className={styles.tableLikeBracket}>Total Price</p>
-    </>
-  );
+  if (pageType === "shop") {
+    const styles = shopStyles;
+    return <div className={styles.cardGrid}>{productCards}</div>;
+  } else if (pageType === "cart") {
+    const styles = cartStyles;
+    const cartHeader = (
+      <>
+        <p className={styles.productTitle + " " + styles.tableLikeBracket}>
+          Product
+        </p>
+        <p className={styles.tableLikeBracket}>Price (Each)</p>
+        <p className={styles.tableLikeBracket}>Quantity</p>
+        <p className={styles.tableLikeBracket}>Total Price</p>
+      </>
+    );
 
-  const grandTotal = Object.values(products)
-    .reduce((p, c) => p + c.price * c.quantity, 0)
-    .toFixed(2);
+    const grandTotal = products
+      .reduce((p, c) => p + c.price * c.quantity, 0)
+      .toFixed(2);
 
-  const totalDisplay = (
-    <div className={styles.grandTotalDisplay}>
-      {isInCart && <p className={styles.grandTotalLabel}>Grand Total</p>}
-      {isInCart && <p className={styles.grandTotalValue}>${grandTotal}</p>}
-    </div>
-  );
+    const totalDisplay = (
+      <div className={styles.grandTotalDisplay}>
+        <p className={styles.grandTotalLabel}>Grand Total</p>
+        <p className={styles.grandTotalValue}>${grandTotal}</p>
+      </div>
+    );
 
-  return (
-    <div className={styles.cardGrid}>
-      {isInCart && cartHeader}
-      {productCards}
-      {totalDisplay}
-    </div>
-  );
+    return (
+      <div className={styles.cardGrid}>
+        {cartHeader}
+        {productCards}
+        {totalDisplay}
+      </div>
+    );
+  }
 }

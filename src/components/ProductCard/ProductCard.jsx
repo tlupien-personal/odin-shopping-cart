@@ -1,13 +1,15 @@
 import { useState } from "react";
 import { useOutletContext } from "react-router";
-import type1Styles from "./ProductCardType1.module.css";
-import type2Styles from "./ProductCardType2.module.css";
+import shopStyles from "./ProductCardShop.module.css";
+import cartStyles from "./ProductCardCart.module.css";
 
-export default function ProductCard({ styleType, data, isInCart }) {
-  let styles = type1Styles;
-  if (styleType == 2) {
-    styles = type2Styles;
+export default function ProductCard({ data, pageType }) {
+  const isInCart = pageType === "cart";
+  let styles = shopStyles;
+  if (isInCart) {
+    styles = cartStyles;
   }
+
   const [quantity, setQuantity] = useState(data.quantity ?? 1);
   const [cart, setCart] = useOutletContext();
 
