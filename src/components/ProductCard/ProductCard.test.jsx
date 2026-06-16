@@ -34,6 +34,16 @@ const buttonSetup = async (buttonName, pageType = "shop", quantity) => {
   return [user, button];
 };
 
+const inputSetup = async (userInput, pageType) => {
+  const user = userEvent.setup();
+  render(<ProductCard data={MOCK_DATA} pageType={pageType} />);
+  const qtyInput = await screen.findByRole("spinbutton");
+  await user.type(qtyInput, `{backspace}-${userInput}`);
+  // why is there {backspace}?
+  // because on initial render field should contain 1,
+  // so to write something new, the user would have to delete that
+};
+
 describe("ProductCard", () => {
   beforeEach(() => {
     vi.clearAllMocks();
@@ -159,18 +169,75 @@ describe("ProductCard", () => {
     });
   });
 
-  it("does not display an error by default", async () => {
+  it("displays an error for negative numbers (shop)", async () => {
+    await inputSetup("-1", "shop");
+    const errorMsg = await screen.findByRole("alert");
+    expect(errorMsg).toBeInTheDocument();
+  });
+
+  it("displays an error for non-integer numbers (shop)", async () => {
+    await inputSetup("1.5", "shop");
+    const errorMsg = await screen.findByRole("alert");
+    expect(errorMsg).toBeInTheDocument();
+  });
+
+  it("displays an error for zero (shop)", async () => {
+    await inputSetup("0", "shop");
+    const errorMsg = await screen.findByRole("alert");
+    expect(errorMsg).toBeInTheDocument();
+  });
+
+  it("displays an error for letters (shop)", async () => {
+    await inputSetup("abc", "shop");
+    const errorMsg = await screen.findByRole("alert");
+    expect(errorMsg).toBeInTheDocument();
+  });
+
+  it("displays an error for negative numbers (cart)", async () => {
+    await inputSetup("-1", "cart");
+    const errorMsg = await screen.findByRole("alert");
+    expect(errorMsg).toBeInTheDocument();
+  });
+
+  it("displays an error for non-integer numbers (cart)", async () => {
+    await inputSetup("1.5", "cart");
+    const errorMsg = await screen.findByRole("alert");
+    expect(errorMsg).toBeInTheDocument();
+  });
+
+  it("displays an error for zero (cart)", async () => {
+    await inputSetup("0", "cart");
+    const errorMsg = await screen.findByRole("alert");
+    expect(errorMsg).toBeInTheDocument();
+  });
+
+  it("displays an error for letters (cart)", async () => {
+    await inputSetup("abc", "cart");
+    const errorMsg = await screen.findByRole("alert");
+    expect(errorMsg).toBeInTheDocument();
+  });
+
+  it("does not display an error by default (shop)", async () => {
     render(<ProductCard data={MOCK_DATA} pageType="shop" />);
     const errorMsg = screen.queryByRole("alert");
     expect(errorMsg).not.toBeInTheDocument();
   });
 
-  it("displays an error for negative numbers", async () => {
-    const user = userEvent.setup();
-    render(<ProductCard data={MOCK_DATA} pageType="shop" />);
-    const qtyInput = await screen.findByRole("spinbutton");
-    await user.type(qtyInput, "-1");
-    const errorMsg = await screen.findByRole("alert");
-    expect(errorMsg).toBeInTheDocument();
+  it("does not display an error by default (cart)", async () => {
+    render(<ProductCard data={MOCK_DATA} pageType="cart" />);
+    const errorMsg = screen.queryByRole("alert");
+    expect(errorMsg).not.toBeInTheDocument();
+  });
+
+  it("disables the add to cart button on bad input", async () => {
+    await inputSetup("-1", "shop");
+    const cartBtn = await screen.findByRole("button", { name: "command" });
+    expect(cartBtn).toBeDisabled();
+  });
+
+  it("does not disable the remove button on bad input", async () => {
+    await inputSetup("-1", "cart");
+    const cartBtn = await screen.findByRole("button", { name: "command" });
+    expect(cartBtn).not.toBeDisabled();
   });
 });
