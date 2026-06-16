@@ -59,6 +59,12 @@ describe("ProductCard", () => {
     expect(price).toBeInTheDocument();
   });
 
+  it("puts total price on pageType cart", async () => {
+    render(<ProductCard data={MOCK_DATA} pageType={"cart"} />);
+    const prices = await screen.findAllByText(/\$/i);
+    expect(prices.length).toBe(2);
+  });
+
   it("starts at qty 1 by default", async () => {
     render(<ProductCard data={MOCK_DATA} />);
     const qtyInput = await screen.findByRole("spinbutton");
