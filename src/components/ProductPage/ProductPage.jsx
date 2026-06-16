@@ -5,7 +5,7 @@ import { useOutletContext } from "react-router";
 import ProductGrid from "../ProductGrid";
 import styles from "./ProductPage.module.css";
 
-export default function ProductDataWrapper({ pageType }) {
+export default function ProductPage({ pageType }) {
   const { products, isLoading, error } = useProductData();
   const [cart, _] = useOutletContext();
 

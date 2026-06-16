@@ -14,15 +14,22 @@ export default function ProductCard({ data, pageType }) {
   const [badInputMsg, setBadInputMsg] = useState(null);
   const [cart, setCart] = useOutletContext();
 
-  const safeSetQuantity = (e) => {
-    e.preventDefault();
-    const value = e.target.value;
+  const safeSetQuantity = (value) => {
     setQuantity(value);
     if (!(Number.isInteger(+value) && +value > 0)) {
       setBadInputMsg("Qty. must be a positive whole number");
     } else {
       setBadInputMsg(null);
+      if (isInCart) {
+        replaceCartEntry(+value);
+      }
     }
+  };
+
+  const onChange = (e) => {
+    e.preventDefault();
+    const value = e.target.value;
+    safeSetQuantity(value);
   };
 
   const replaceCartEntry = (newQuantity) => {
@@ -32,20 +39,14 @@ export default function ProductCard({ data, pageType }) {
   const increment = (e) => {
     e.preventDefault();
     const newQuantity = +quantity + 1;
-    setQuantity(newQuantity);
-    if (isInCart) {
-      replaceCartEntry(newQuantity);
-    }
+    safeSetQuantity(newQuantity);
   };
 
   const decrement = (e) => {
     e.preventDefault();
     if (+quantity > 1) {
       const newQuantity = +quantity - 1;
-      setQuantity(newQuantity);
-      if (isInCart) {
-        replaceCartEntry(newQuantity);
-      }
+      safeSetQuantity(newQuantity);
     }
   };
 
@@ -79,7 +80,7 @@ export default function ProductCard({ data, pageType }) {
             name="qty"
             type="number"
             value={quantity}
-            onChange={safeSetQuantity}
+            onChange={onChange}
           />
         </div>
         <div className={styles.ments}>
@@ -121,7 +122,9 @@ export default function ProductCard({ data, pageType }) {
         )}
       </form>
       {isInCart && (
-        <p className={styles.price}>${(data.price * quantity).toFixed(2)}</p>
+        <p className={styles.price}>
+          ${(data.price * Math.max(Math.floor(quantity), 1)).toFixed(2)}
+        </p>
       )}
     </div>
   );

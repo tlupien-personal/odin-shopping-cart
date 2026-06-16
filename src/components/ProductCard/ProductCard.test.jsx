@@ -37,7 +37,7 @@ const inputSetup = async (userInput, pageType) => {
   const user = userEvent.setup();
   render(<ProductCard data={MOCK_DATA} pageType={pageType} />);
   const qtyInput = await screen.findByRole("spinbutton");
-  await user.type(qtyInput, `{backspace}-${userInput}`);
+  await user.type(qtyInput, `{backspace}${userInput}`);
   // why is there {backspace}?
   // because on initial render field should contain 1,
   // so to write something new, the user would have to delete that
@@ -244,5 +244,28 @@ describe("ProductCard", () => {
     await inputSetup("-1", "cart");
     const cartBtn = await screen.findByRole("button", { name: "command" });
     expect(cartBtn).not.toBeDisabled();
+  });
+
+  it("updates the cart when keyboard input validly modifies qty", async () => {
+    await inputSetup("2", "cart");
+    expect(mockSetCart).toHaveBeenCalledTimes(1);
+    expect(mockSetCart).toHaveBeenCalledWith({
+      1: 1,
+      69: 2,
+    });
+  });
+
+  it("avoids displaying negative price", async () => {
+    await inputSetup("-2", "cart");
+    const priceCols = await screen.findAllByText(/\$/i);
+    const totalPrice = priceCols[1];
+    expect(totalPrice).toHaveTextContent("$2.00");
+  });
+
+  it("avoids displaying price based on decimal quantity", async () => {
+    await inputSetup("1.5", "cart");
+    const priceCols = await screen.findAllByText(/\$/i);
+    const totalPrice = priceCols[1];
+    expect(totalPrice).toHaveTextContent("$2.00");
   });
 });
