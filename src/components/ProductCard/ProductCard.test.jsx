@@ -2,6 +2,7 @@ import { vi, describe, it, expect, beforeEach } from "vitest";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import ProductCard from "./ProductCard";
+import { keyboard } from "@testing-library/user-event/dist/cjs/keyboard/index.js";
 
 let mockCart = { 1: 1 };
 const mockSetCart = vi.fn();
@@ -156,5 +157,20 @@ describe("ProductCard", () => {
     expect(mockSetCart).toHaveBeenCalledWith({
       1: 1,
     });
+  });
+
+  it("does not display an error by default", async () => {
+    render(<ProductCard data={MOCK_DATA} pageType="shop" />);
+    const errorMsg = screen.queryByRole("alert");
+    expect(errorMsg).not.toBeInTheDocument();
+  });
+
+  it("displays an error for negative numbers", async () => {
+    const user = userEvent.setup();
+    render(<ProductCard data={MOCK_DATA} pageType="shop" />);
+    const qtyInput = await screen.findByRole("spinbutton");
+    await user.type(qtyInput, "-1");
+    const errorMsg = await screen.findByRole("alert");
+    expect(errorMsg).toBeInTheDocument();
   });
 });

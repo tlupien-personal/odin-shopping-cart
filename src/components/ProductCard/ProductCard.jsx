@@ -11,7 +11,19 @@ export default function ProductCard({ data, pageType }) {
   }
 
   const [quantity, setQuantity] = useState(data.quantity ?? 1);
+  const [badInputMsg, setBadInputMsg] = useState(null);
   const [cart, setCart] = useOutletContext();
+
+  const safeSetQuantity = (e) => {
+    e.preventDefault();
+    const value = e.target.value;
+    setQuantity(value);
+    if (!(Number.isInteger(+value) && +value > 0)) {
+      setBadInputMsg("Qty. must be a positive whole number");
+    } else {
+      setBadInputMsg(null);
+    }
+  };
 
   const replaceCartEntry = (newQuantity) => {
     setCart({ ...cart, [data.id]: newQuantity });
@@ -19,7 +31,7 @@ export default function ProductCard({ data, pageType }) {
 
   const increment = (e) => {
     e.preventDefault();
-    const newQuantity = quantity + 1;
+    const newQuantity = +quantity + 1;
     setQuantity(newQuantity);
     if (isInCart) {
       replaceCartEntry(newQuantity);
@@ -28,8 +40,8 @@ export default function ProductCard({ data, pageType }) {
 
   const decrement = (e) => {
     e.preventDefault();
-    if (quantity > 1) {
-      const newQuantity = quantity - 1;
+    if (+quantity > 1) {
+      const newQuantity = +quantity - 1;
       setQuantity(newQuantity);
       if (isInCart) {
         replaceCartEntry(newQuantity);
@@ -39,7 +51,7 @@ export default function ProductCard({ data, pageType }) {
 
   const addToCart = (e) => {
     e.preventDefault();
-    setCart({ ...cart, [data.id]: (cart[data.id] ?? 0) + quantity });
+    setCart({ ...cart, [data.id]: (cart[data.id] ?? 0) + +quantity });
   };
 
   const removeFromCart = (e) => {
@@ -49,12 +61,17 @@ export default function ProductCard({ data, pageType }) {
     setCart(cartCopy);
   };
 
+  const killButton = !isInCart && badInputMsg;
+
   return (
     <div className={styles.card}>
       <p className={styles.title}>{data.title}</p>
       <img src={data.image} alt="a fake product image" />
       <p className={styles.price}>${data.price?.toFixed(2)}</p>
-      <form className={styles.cartForm}>
+      <form
+        className={styles.cartForm}
+        onSubmit={isInCart ? removeFromCart : addToCart}
+      >
         <div className={styles.formRow}>
           <label htmlFor="qty">Qty</label>
           <input
@@ -62,7 +79,7 @@ export default function ProductCard({ data, pageType }) {
             name="qty"
             type="number"
             value={quantity}
-            onChange={(e) => setQuantity(e.target.value)}
+            onChange={safeSetQuantity}
           />
         </div>
         <div className={styles.ments}>
@@ -91,12 +108,17 @@ export default function ProductCard({ data, pageType }) {
         </div>
         <button
           aria-label="command"
-          className={`hoverGrow ${styles.commandBtn}`}
-          type="button"
-          onClick={isInCart ? removeFromCart : addToCart}
+          className={`${!killButton && "hoverGrow"} ${styles.commandBtn}`}
+          type="submit"
+          disabled={killButton}
         >
           {isInCart ? "Remove" : "Add to Cart"}
         </button>
+        {badInputMsg && (
+          <div className={styles.qtyErr} role="alert">
+            {badInputMsg}
+          </div>
+        )}
       </form>
       {isInCart && (
         <p className={styles.price}>${(data.price * quantity).toFixed(2)}</p>

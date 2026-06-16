@@ -73,7 +73,7 @@ input[type="number"] {
   box-shadow: 2px 2px 4px #666;
 }
 
-.commandBtn:active {
+.commandBtn:active:not(:disabled) {
   box-shadow: unset;
 }
 
@@ -132,7 +132,7 @@ input[type="number"] {
     display: grid;
     width: 100%;
     grid-template-columns: 1fr;
-    grid-template-rows: 250px 1fr 2rem 3rem 2rem;
+    grid-template-rows: 250px 1fr 2rem 5rem 2rem;
     gap: 10px;
     justify-items: center;
   }
@@ -170,4 +170,15 @@ input[type="number"] {
   .price:last-child::before {
     content: "Total ";
   }
+}
+
+.qtyErr {
+  font-size: 0.8rem;
+  color: #db3a00; /* contrastCoral */
+  grid-column: 1 / 4;
+  text-align: center;
+}
+
+button:disabled {
+  background-color: grey;
 }

@@ -27,6 +27,7 @@
 
 .cartForm {
   display: grid;
+  width: min-content;
   grid-template-columns: min-content 25px 1fr;
   align-items: center;
   gap: 1ch;
@@ -82,6 +83,17 @@ input[type="number"] {
   box-shadow: 2px 2px 4px #666;
 }
 
-.commandBtn:active {
+.commandBtn:active:not(:disabled) {
   box-shadow: unset;
+}
+
+.qtyErr {
+  font-size: 0.8rem;
+  color: #db3a00; /* contrastCoral */
+  grid-column: 1 / 4;
+  text-align: center;
+}
+
+button:disabled {
+  background-color: grey;
 }
