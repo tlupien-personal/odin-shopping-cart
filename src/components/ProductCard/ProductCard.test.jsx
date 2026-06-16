@@ -2,7 +2,6 @@ import { vi, describe, it, expect, beforeEach } from "vitest";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import ProductCard from "./ProductCard";
-import { keyboard } from "@testing-library/user-event/dist/cjs/keyboard/index.js";
 
 let mockCart = { 1: 1 };
 const mockSetCart = vi.fn();

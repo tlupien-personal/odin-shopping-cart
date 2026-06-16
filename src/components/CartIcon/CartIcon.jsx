@@ -9,7 +9,13 @@ export default function CartIcon({ cart }) {
       key={cartSize}
       to="/cart"
     >
-      <p className={styles.cartBadge}>{cartSize}</p>
+      <span
+        className={styles.cartBadge}
+        aria-label="Total Item Count"
+        role="status"
+      >
+        {cartSize}
+      </span>
       <svg
         className={styles.cart}
         xmlns="http://www.w3.org/2000/svg"
