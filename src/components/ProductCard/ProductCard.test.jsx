@@ -268,4 +268,12 @@ describe("ProductCard", () => {
     const totalPrice = priceCols[1];
     expect(totalPrice).toHaveTextContent("$2.00");
   });
+
+  it("does not exhibit unexpected behavior when you type Enter", async () => {
+    await inputSetup("2{enter}", "shop");
+    expect(mockSetCart).toHaveBeenCalledTimes(0);
+    // the point being that if the enter key event was not properly
+    // intercepted, it would have submitted the form, equivalent to
+    // having pressed the "Add to Cart" button
+  });
 });

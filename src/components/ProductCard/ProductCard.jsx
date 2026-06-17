@@ -81,6 +81,7 @@ export default function ProductCard({ data, pageType }) {
             type="number"
             value={quantity}
             onChange={onChange}
+            onKeyDown={(e) => e.key === "Enter" && e.preventDefault()}
           />
         </div>
         <div className={styles.ments}>
