@@ -1,0 +1,99 @@
+.card {
+  border: 1px solid black;
+  border-radius: 10px;
+  box-shadow: 2px 2px 4px #666;
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+.card > img {
+  max-height: 200px;
+  justify-self: center;
+  margin: auto 0;
+}
+
+.title {
+  font-size: 1.25rem;
+}
+
+.price {
+  font-size: 1.5rem;
+  font-weight: bold;
+  justify-self: flex-end;
+}
+
+.cartForm {
+  display: grid;
+  width: min-content;
+  grid-template-columns: min-content 25px 1fr;
+  align-items: center;
+  gap: 1ch;
+  justify-self: flex-end;
+}
+
+.formRow {
+  display: flex;
+  gap: 1ch;
+  font-weight: bold;
+  align-items: center;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+.formRow input {
+  max-width: 5ch;
+  text-align: right;
+}
+
+.ments {
+  display: flex;
+  flex-direction: column;
+}
+
+.ments button {
+  padding: 0;
+  border: none;
+  background-color: unset;
+}
+.ments button svg {
+  width: 25px;
+  height: 25px;
+}
+
+.commandBtn {
+  background-color: teal;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  padding: 5px 10px;
+  white-space: nowrap;
+  box-shadow: 2px 2px 4px #666;
+}
+
+.commandBtn:active:not(:disabled) {
+  box-shadow: unset;
+}
+
+.qtyErr {
+  font-size: 0.8rem;
+  color: #db3a00; /* contrastCoral */
+  grid-column: 1 / 4;
+  text-align: center;
+}
+
+button:disabled {
+  background-color: grey;
+}

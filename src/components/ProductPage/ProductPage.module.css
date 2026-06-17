@@ -1,0 +1,21 @@
+.cart {
+  padding: 25px;
+  margin: 0 auto;
+  width: fit-content;
+}
+
+@media (width < 600px) {
+  .cart {
+    padding: 10px;
+  }
+}
+
+.shop {
+  padding: 25px 50px;
+}
+
+@media (width < 600px) {
+  .shop {
+    padding: 25px;
+  }
+}

@@ -1,0 +1,184 @@
+.card {
+  display: contents;
+}
+
+.card > img {
+  max-width: 100%;
+  align-self: center;
+}
+
+.title {
+  font-size: 1.25rem;
+  align-self: center;
+}
+
+.price {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.cartForm {
+  display: grid;
+  grid-template-columns: min-content 25px 1fr;
+  align-items: center;
+  gap: 1ch;
+}
+
+.formRow {
+  display: flex;
+  gap: 1ch;
+  font-weight: bold;
+  align-items: center;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+.formRow input {
+  max-width: 5ch;
+  text-align: right;
+}
+
+.ments {
+  display: flex;
+  flex-direction: column;
+}
+
+.ments button {
+  padding: 0;
+  border: none;
+  background-color: unset;
+}
+.ments button svg {
+  width: 25px;
+  height: 25px;
+}
+
+.commandBtn {
+  background-color: coral;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  white-space: nowrap;
+  width: max-content;
+  box-shadow: 2px 2px 4px #666;
+}
+
+.commandBtn:active:not(:disabled) {
+  box-shadow: unset;
+}
+
+@media (width < 1100px) {
+  .card {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 250px 3fr;
+    grid-template-rows: repeat(4, 1fr);
+    gap: 10px 25px;
+    justify-items: start;
+    align-items: center;
+    padding-bottom: 10px;
+    border-bottom: 2px solid black;
+  }
+
+  .card > img {
+    grid-row: 1 / 5;
+    max-height: 250px;
+    max-width: 250px;
+    grid-column: 1;
+    justify-self: center;
+  }
+
+  .title {
+    grid-row: 1;
+    grid-column: 2;
+  }
+
+  .price {
+    grid-row: 2;
+    grid-column: 2;
+  }
+
+  .price:not(:last-child)::after {
+    content: " (ea.)";
+  }
+
+  .cartForm {
+    grid-row: 3;
+    grid-column: 2;
+  }
+
+  .price:last-child {
+    grid-row: 4;
+    grid-column: 2;
+  }
+
+  .price:last-child::before {
+    content: "Total ";
+  }
+}
+
+@media (width < 600px) {
+  .card {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 1fr;
+    grid-template-rows: 250px 1fr 2rem 5rem 2rem;
+    gap: 10px;
+    justify-items: center;
+  }
+
+  .card * {
+    grid-column: unset;
+  }
+
+  .card > img {
+    grid-row: 1;
+    max-height: 100%;
+  }
+
+  .title {
+    grid-row: 2;
+  }
+
+  .price {
+    grid-row: 3;
+  }
+
+  .price:not(:last-child)::after {
+    content: " each";
+  }
+
+  .cartForm {
+    grid-row: 4;
+  }
+
+  .price:last-child {
+    grid-row: 5;
+    grid-column: unset;
+  }
+
+  .price:last-child::before {
+    content: "Total ";
+  }
+}
+
+.qtyErr {
+  font-size: 0.8rem;
+  color: #db3a00; /* contrastCoral */
+  grid-column: 1 / 4;
+  text-align: center;
+}
+
+button:disabled {
+  background-color: grey;
+}
