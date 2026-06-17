@@ -22,8 +22,7 @@ const mockProducts = [
 ];
 
 vi.mock("../ProductGrid", () => ({
-  default: ({ products }) => products.map((p) => <p>{p.id}</p>),
-  // one of the lines of code of all time
+  default: ({ products }) => products.map((p) => <p key={p.id}>{p.id}</p>),
 }));
 
 describe("ProductPage", () => {
